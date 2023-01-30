@@ -14,6 +14,7 @@ class PostService
         $postData  = $request->validated();
 
         $postData['file'] = $imageName;
+        $postData['user_id'] = auth()->user()->id;
 
         return Post::create($postData);
     }

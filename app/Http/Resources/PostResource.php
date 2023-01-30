@@ -21,7 +21,12 @@ class PostResource extends JsonResource
             'description' => $this->description,
             'file' => asset(Post::PATH . $this->file),
 
-            'users' => $this->users,
+            'is_liked' => $this->when($this->likes, function () {
+                return $this->likes()->where('user_id', 1)->where('post_id', $this->id)->exists();
+            }),
+
+            'totalLikes' => $this->likes->count(),
+            'user' => $this->user,
         ];
     }
 }

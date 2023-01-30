@@ -21,8 +21,25 @@ class PostController extends Controller
         return response()->json([
             'message' => 'Posts fetched successfully',
             'posts' => PostResource::collection(
-                Post::with('user')->paginate(5)
+                Post::with('user')->paginate(20)
             )->response()->getData(true),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function favorites()
+    {;
+        $posts =   Post::with('user')->whereHas('likes', function ($query) {
+            return $query->where('user_id', auth()->user()->id);
+        })->paginate(20);
+
+        return response()->json([
+            'message' => 'Posts fetched successfully',
+            'posts' => PostResource::collection($posts)->response()->getData(true),
         ]);
     }
 
