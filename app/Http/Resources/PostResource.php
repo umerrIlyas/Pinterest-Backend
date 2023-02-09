@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'file' => asset(Post::PATH . $this->file),
+            'file' => $this->is_default ? $this->file : asset(Post::PATH . $this->file),
 
             'is_liked' => $this->when($this->likes, function () {
                 return $this->likes()->where('user_id', 1)->where('post_id', $this->id)->exists();

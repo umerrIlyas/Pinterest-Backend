@@ -21,6 +21,7 @@ class PostFactory extends Factory
             'user_id' => rand(1, 10),
             'title' => $this->faker->title(),
             'description' => $this->faker->sentence(),
+            'is_default' => true,
             'file' => $this->faker->imageUrl(),
         ];
     }

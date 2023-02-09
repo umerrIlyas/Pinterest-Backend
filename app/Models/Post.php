@@ -20,7 +20,8 @@ class Post extends Model
         'title',
         'description',
         'file',
-        'is_approved'
+        'is_approved',
+        'is_default',
     ];
 
     /**
